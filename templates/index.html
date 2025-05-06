@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Собачки</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('/media/emoji-fafafa-1920x1080.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+    
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    
+        h1 {
+            color: rgb(239, 237, 255); /* можно изменить по желанию */
+            background-color: rgb(11, 10, 14);
+            margin-bottom: 20px;
+        }
+    
+        img {
+            width: 400px;
+            margin-bottom: 20px;
+        }
+    
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Собака вот такая</h1>
+    <img id="dog-img" src="{{image_url}}" alt="dog" style="width: 400px;">
+    <button onclick="changeDog()">поменяй собачку</button>
+    <script>
+        async function changeDog() {
+            try{
+                const response = await fetch("/dog");
+                const data = await response.json();
+                document.getElementById("dog-img").src = data.image_url;
+
+            } catch{
+                alert("Не удалось загрузить собаку");
+            }
+        }
+    </script>
+</body>
+</html>
